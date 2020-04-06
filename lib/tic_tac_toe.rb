@@ -67,14 +67,7 @@ def turn_count
 end
 
 def current_player
-  #if the turn count is an even number, that means O just went, so the next/current player is X
-  num_turns = turn_count
-  if num_turns % 2 == 0
-    player = "X"
-  else
-    player = "O"
-  end
-  return player
+  turn_count(board) % 2 == 0 ? "X" : "O"
 end
 
 def won?
