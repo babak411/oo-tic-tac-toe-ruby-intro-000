@@ -32,7 +32,7 @@ def move(index, token="X")
   @board[position] = token
 end
 
-def position_taken?(board, index)
+def position_taken?(index)
   if @board[index] == " " || @board[index] == "" || @board[index] == nil
     return false
   else
@@ -40,15 +40,15 @@ def position_taken?(board, index)
   end
 end
 
-def valid_move?(@board, index)
- (index).between?(0,8) && !(position_taken?(@board, index))
+def valid_move?(index)
+ (index).between?(0,8) && !(position_taken?(index))
 end
 
-def turn(@board)
+def turn
   puts "Please enter 1-9:"
   user_input = gets.strip
   index = input_to_index(user_input)
-   if valid_move?(board, index)
+   if valid_move?(index)
       token = current_player(board)
       move(board, index, token)
       display_board(board)
@@ -57,21 +57,21 @@ def turn(@board)
    end
 end
 
-def turn_count(@board)
-  turns = 0
+def turn_count
+  turn = 0
   @board.each do |value|
     if value == "X" || value == "O"
-      turns += 1
+      turn += 1
     end
   end
-  turns
+  turn
 end
 
-def current_player(@board)
-  turn_count(board) % 2 == 0 ? "X" : "O"
+def current_player
+  turn_count % 2 == 0 ? "X" : "O"
 end
 
-def won?(@board)
+def won?
   WIN_COMBINATIONS.detect do |win_combination|
     win_index_1 = win_combination[0]
     win_index_2 = win_combination[1]
@@ -91,38 +91,38 @@ def won?(@board)
  end
 end
 
-def full?(@board)
+def full?
   !board.detect{|index| index == " "}
 end
 
-def draw?(@board)
-  if !won?(@board) && full?(@board)
+def draw?
+  if !won? && full?
     true
   else
     false
   end
 end
 
-def over?(@board)
-  won?(@board) || full?(@board) || draw?(@board)
+def over?
+  won? || full? || draw?
 end
 
-def winner(@board)
-  if draw?(@board)
+def winner
+  if draw?
     return nil
-  elsif over?(board)
+  elsif over?
     return board[won?(board)[0]]
   else
     return nil
   end
 end
 
-def play(@board)
-  until over?(@board)
-    current_player(@board)
-    turn(@board)
+def play
+  until over?
+    current_player
+    turn
   end
-  if won?(@board)
+  if won?
     puts "Congratulations #{winner(board)}!"
   else
     puts "Cat's Game!"
