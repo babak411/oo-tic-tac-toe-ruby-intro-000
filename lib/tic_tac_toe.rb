@@ -103,8 +103,12 @@ def won?
    end
 
    def over?
-     won? || full? || draw?
+   if won? || draw?
+     return true
+   else
+     return false
    end
+ end
 
 def winner
   if draw?
