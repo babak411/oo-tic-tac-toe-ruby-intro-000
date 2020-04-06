@@ -90,9 +90,9 @@ def won?
     end
    end
 
-def full?
-  @board.all? {|index| index == "X" || index == "O"}
-end
+   def full?
+     !@board.detect{|index| index == " "}
+   end
 
 def draw?
   if !won? && full?
