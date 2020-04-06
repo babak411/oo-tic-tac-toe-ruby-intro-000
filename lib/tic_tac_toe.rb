@@ -40,7 +40,7 @@ def position_taken?(index)
 end
 
 def valid_move?(index)
- (index).between?(0,8) && !(position_taken?(index))
+ index.between?(0,8) && !position_taken?(index)
 end
 
 def turn
@@ -48,11 +48,11 @@ def turn
   user_input = gets.strip
   index = input_to_index(user_input)
    if valid_move?(index)
-      token = current_player(board)
-      move(board, index, token)
-      display_board(board)
+      token = current_player
+      move(index, token)
+      display_board
     else
-      turn(board)
+      turn
    end
 end
 
